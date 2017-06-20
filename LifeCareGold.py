@@ -85,7 +85,7 @@ buttons = { 'goldfish': '68:37:e9:c4:94:01',
 
 def arp_display(pkt):
     wa_login = '15555552121'   #WhatsApp API Unutilized code
-    wa_password = '[somepassword]'
+    wa_password = '[somepassword]'  #Install yowsup2 via pip
     wa_dest = '15555551212'
     wa_msg = '"Button was pressed!"'
     cmd = 'yowsup-cli demos -l '+wa_login+':'+wa_password+' -s '+wa_dest+' '+wa_msg
@@ -151,15 +151,17 @@ while True:
     #time.sleep(1)
     if triggered  != 0 :   #Check if DASH Button is pressed
         os.system('mpg123 -q /home/pi/Desktop/Confirm.mp3 &') #Play MP3 Confirm Prompt
-        requests.post("https://maker.ifttt.com/trigger/Dash/with/key/_67EsfOnVbk8_twJUS-fU")
+        #requests.post("https://maker.ifttt.com/trigger/Dash/with/key/_67EsfOnVbk8_twJUS-fU")
         triggered = 0      #Reset Variable for the next loop
     else:
+        requests.post("https://maker.ifttt.com/trigger/Dash/with/key/_67EsfOnVbk8_twJUS-fU")
         os.system('mpg123 -q /home/pi/Desktop/NotFound.mp3 &') #Play MP3 Not Received
         print("\nNOTIFICATION ALERT: The Dash Button was not detected during the time frame. Sending notifications to assigned contacts now.\n")
 
     #os.system('/home/pi/wiringPi/rpi-examples/buzzer/c/starwars &') #StarWars Buzzer Tester (Easter Egg)
 
 print(sniff(iface="wlan0", prn=arp_display, filter=f, store=0))
+
 
 
 
